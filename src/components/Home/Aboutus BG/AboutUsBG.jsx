@@ -10,7 +10,7 @@ const AboutUsBG = () => {
 
                     <div className='relative'>
                         <img src={img} className="w-3/4 rounded-lg shadow-2xl" />
-                        <img src={img2} className="w-1/2 border-8 right-16 top-1/2 rounded-lg shadow-2xl absolute" />
+                        <img src={img2} className="w-1/2 border-8 border-white right-16 top-1/2 rounded-lg shadow-2xl absolute" />
                     </div>
 
                     <div>

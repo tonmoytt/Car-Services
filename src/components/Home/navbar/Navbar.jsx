@@ -1,10 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import img from './../../../assets/assets/logo.svg'
 import { HiOutlineSearch, HiOutlineShoppingBag } from 'react-icons/hi';
+import { useContext } from "react";
+import { AuthConnect } from "../../../Authonction/AuthProvider/AuthProvider";
 
 
 
 const Navbar = () => {
+    const {user,SignOut} =useContext(AuthConnect)
     const Navbar = <>
         <li className="text-lg font-semibold mr-1"> <NavLink to='/'>Home</NavLink></li>
         <li className="text-lg font-semibold mr-1"> <NavLink to='/about'>About</NavLink></li>
@@ -13,7 +16,21 @@ const Navbar = () => {
         <li className="text-lg font-semibold mr-1"> <NavLink to='/contact'>Contact</NavLink></li>
     </>
 
-
+const hendelout=() =>{
+    SignOut()
+    .then(result =>{
+       console.log( result.user);
+    })
+    .catch(error =>{
+        console.error(error);
+        swal({
+            title: "Opps!",
+            text: "Successfull Logout",
+            icon: "success",
+            button: "Opps!",
+        });
+    })
+}
     return (
         <div className="mt-10 mx-6">
 
@@ -56,7 +73,14 @@ const Navbar = () => {
 
                     </div>
 
-                    <a className="btn bg-orange-300">Appointment</a>
+                     <div>
+                        {
+                            user ? <>
+                            <span> {user.email}   </span>  <button onClick={hendelout} className=" btn btn-sm  bg-sky-200 md:text-lg lg:text-lg   hover:font-bold hover:underline hover:bg-orange-200">SignOut</button></>
+                            :
+                            <Link to="/login"><button className="btn text-lg btn-outline btn-secondary">Appointment</button></Link>
+                        }
+                     </div>
                 </div>
             </div>
         </div>
